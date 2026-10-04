@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ryo Yamada Beta Test — acompanhe o desenvolvimento, novidades e lançamento.">
+  <title>Ryo Yamada — Beta Test</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --blue:#168cff;
+  --blue-light:#58b2ff;
+  --white:#f5f8fc;
+  --muted:#8d9aaa;
+  --black:#05070a;
+  --panel:#0b1016;
+  --border:rgba(255,255,255,.09);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);color:var(--white);
+  font-family:Inter,Arial,sans-serif;line-height:1.6;overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;opacity:.13;
+  background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(100px);opacity:.13;pointer-events:none}
+.glow-1{background:var(--blue);top:-180px;right:-120px}
+.glow-2{background:#0066ff;bottom:5%;left:-300px}
+
+.navbar{
+  position:fixed;z-index:10;top:0;left:0;right:0;height:76px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 7%;
+  background:rgba(5,7,10,.75);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border)
+}
+.brand{font-family:"Space Grotesk";font-weight:700;letter-spacing:.06em;font-size:14px}
+.brand b{color:var(--blue);margin-left:7px;font-size:10px}
+.brand-dot{display:inline-block;width:7px;height:7px;background:var(--blue);border-radius:50%;margin-right:9px;box-shadow:0 0 16px var(--blue)}
+nav{display:flex;gap:32px}
+nav a{font-size:13px;color:var(--muted);transition:.2s}
+nav a:hover{color:white}
+.menu-toggle{display:none;background:none;border:0;color:white;font-size:24px}
+
+.hero{
+  min-height:100vh;padding:150px 7% 90px;display:grid;grid-template-columns:1.15fr .85fr;
+  gap:70px;align-items:center;max-width:1400px;margin:auto
+}
+.eyebrow,.section-label,.news-tag,.launch-kicker{
+  font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--blue)
+}
+.eyebrow{display:flex;align-items:center;gap:9px;margin-bottom:22px}
+.eyebrow span{width:30px;height:1px;background:var(--blue)}
+h1{font-family:"Space Grotesk";font-size:clamp(52px,8vw,110px);line-height:.9;letter-spacing:-.065em}
+h1 span{color:var(--blue);-webkit-text-stroke:1px rgba(255,255,255,.08)}
+.hero-content>p{max-width:620px;color:var(--muted);margin:28px 0;font-size:16px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--border);padding:13px 19px;border-radius:7px;
+  font-size:11px;font-weight:800;letter-spacing:.12em;cursor:pointer;transition:.25s
+}
+.btn-primary{background:var(--blue);border-color:var(--blue);color:white}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 35px rgba(22,140,255,.25)}
+.btn-ghost{background:rgba(255,255,255,.02);color:white}
+.btn-ghost:hover{border-color:var(--blue)}
+
+.hero-card{
+  position:relative;min-height:440px;border:1px solid var(--border);
+  background:linear-gradient(145deg,#0d141d,#07090d);display:flex;align-items:center;justify-content:center;
+  overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)
+}
+.hero-card:before{
+  content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(22,140,255,.35);
+  border-radius:50%;box-shadow:0 0 0 55px rgba(22,140,255,.025),0 0 0 110px rgba(22,140,255,.018)
+}
+.hero-symbol{
+  font-family:"Space Grotesk";font-size:92px;font-weight:800;letter-spacing:-.09em;
+  color:white;text-shadow:0 0 45px rgba(22,140,255,.45);z-index:1
+}
+.status{position:absolute;top:22px;left:22px;font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.status span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--blue);margin-right:7px;box-shadow:0 0 12px var(--blue)}
+.hero-card-bottom{position:absolute;bottom:0;left:0;right:0;padding:17px 22px;display:flex;justify-content:space-between;border-top:1px solid var(--border);font-size:10px;color:var(--muted)}
+.hero-card-bottom strong{color:white}.scan-line{position:absolute;left:0;right:0;top:0;height:1px;background:var(--blue);opacity:.35;animation:scan 5s linear infinite}
+@keyframes scan{0%{top:0}100%{top:100%}}
+
+.section{max-width:1180px;margin:auto;padding:110px 7%}
+.section-heading{display:flex;gap:20px;align-items:flex-start;margin-bottom:60px}
+.section-heading>span{font:600 12px "Space Grotesk";color:var(--blue);padding-top:7px}
+.section-heading h2{font:600 42px "Space Grotesk";letter-spacing:-.04em}
+.two-column{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.lead{font-size:23px;line-height:1.45;margin-bottom:25px}
+.two-column>div>p:not(.lead){color:var(--muted);max-width:550px}
+.feature-list{border-top:1px solid var(--border)}
+.feature{display:grid;grid-template-columns:45px 1fr;gap:18px;padding:23px 0;border-bottom:1px solid var(--border)}
+.feature>span{color:var(--blue);font:700 12px "Space Grotesk"}
+.feature h3{font-size:15px;margin-bottom:4px}.feature p{color:var(--muted);font-size:13px}
+
+.launch-section{padding-top:40px}
+.launch-card{
+  border:1px solid var(--border);background:linear-gradient(130deg,#0b121a,#080a0e);
+  padding:48px;display:grid;grid-template-columns:1fr auto;gap:35px;align-items:center
+}
+.launch-card h3{font:700 54px "Space Grotesk";letter-spacing:-.06em;margin:5px 0}
+.muted{color:var(--muted);font-size:13px}
+.countdown{display:flex;align-items:center;gap:14px}
+.countdown div{text-align:center;min-width:62px}.countdown strong{display:block;font:700 30px "Space Grotesk"}
+.countdown small{font-size:8px;color:var(--muted);letter-spacing:.15em}.countdown i{color:var(--blue);font-style:normal}
+.launch-note{grid-column:1/-1;border-top:1px solid var(--border);padding-top:18px;font-size:10px;letter-spacing:.16em;color:var(--muted)}
+.pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:8px;box-shadow:0 0 0 5px rgba(22,140,255,.1)}
+
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.news-card{position:relative;border:1px solid var(--border);padding:30px;min-height:260px;background:rgba(255,255,255,.015);transition:.25s}
+.news-card:hover{border-color:rgba(22,140,255,.45);transform:translateY(-4px)}
+.news-number{font:700 34px "Space Grotesk";color:rgba(255,255,255,.08)}
+.news-tag{margin:35px 0 10px;font-size:9px}
+.news-card h3{font:600 20px "Space Grotesk";line-height:1.25}.news-card p:last-child{color:var(--muted);font-size:13px;margin-top:12px}
+
+.cta{max-width:1180px;margin:0 auto 100px;padding:45px 7%;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(100deg,rgba(22,140,255,.08),transparent)}
+.cta h2{font:600 34px "Space Grotesk";margin-top:4px}
+
+footer{border-top:1px solid var(--border);padding:35px 7%;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px}
+footer strong{color:white;font:700 13px "Space Grotesk"}footer strong span{color:var(--blue)}
+.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#10161e;border:1px solid var(--border);padding:13px 18px;border-radius:7px;font-size:12px;opacity:0;pointer-events:none;transition:.3s;z-index:20}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:800px){
+  .navbar{padding:0 5%}nav{display:none;position:absolute;top:76px;left:0;right:0;padding:20px 5%;background:#080b10;border-bottom:1px solid var(--border);flex-direction:column;gap:18px}nav.open{display:flex}.menu-toggle{display:block}
+  .hero{grid-template-columns:1fr;padding:135px 6% 70px;gap:45px}.hero-card{min-height:300px}.hero-symbol{font-size:70px}
+  .section{padding:80px 6%}.two-column{grid-template-columns:1fr;gap:50px}.news-grid{grid-template-columns:1fr}
+  .launch-card{grid-template-columns:1fr;padding:30px}.countdown{justify-content:flex-start}.cta{margin:0 6% 70px;padding:30px;display:block}.cta .btn{margin-top:22px}
+  footer{display:block;padding:30px 6%}footer>p{margin-top:15px}
+}
+
+</style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <header class="navbar">
+    <a class="brand" href="#inicio">
+      <span class="brand-dot"></span>
+      RYO YAMADA <b>BETA TEST</b>
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#beta">Beta</a>
+      <a href="#lancamento">Lançamento</a>
+      <a href="#novidades">Novidades</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-content">
+        <div class="eyebrow"><span></span> PROJETO EM DESENVOLVIMENTO</div>
+        <h1>RYO YAMADA<br><span>BETA TEST</span></h1>
+        <p>
+          Uma nova experiência está sendo preparada.
+          Acompanhe o desenvolvimento, descubra as novidades
+          e fique por dentro do lançamento.
+        </p>
+        <div class="hero-actions">
+          <a href="#lancamento" class="btn btn-primary">VER LANÇAMENTO</a>
+          <a href="#beta" class="btn btn-ghost">SAIBA MAIS</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="scan-line"></div>
+        <div class="status"><span></span> BETA EM PREPARAÇÃO</div>
+        <div class="hero-symbol">RYO</div>
+        <div class="hero-card-bottom">
+          <span>STATUS</span>
+          <strong>DESENVOLVIMENTO</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="beta" class="section">
+      <div class="section-heading">
+        <span>01</span>
+        <div>
+          <p class="section-label">SOBRE O PROJETO</p>
+          <h2>Beta Test</h2>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <div>
+          <p class="lead">
+            O <strong>Ryo Yamada Beta Test</strong> é uma fase experimental
+            criada para testar sistemas, recursos e funcionalidades antes
+            do lançamento oficial.
+          </p>
+          <p>
+            Durante o beta, novidades poderão ser adicionadas, ajustadas
+            ou modificadas conforme o desenvolvimento. Este espaço será
+            atualizado com as principais informações do projeto.
+          </p>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature">
+            <span>01</span>
+            <div><h3>Testes</h3><p>Recursos experimentais antes do lançamento.</p></div>
+          </div>
+          <div class="feature">
+            <span>02</span>
+            <div><h3>Atualizações</h3><p>Novidades e melhorias durante o desenvolvimento.</p></div>
+          </div>
+          <div class="feature">
+            <span>03</span>
+            <div><h3>Comunidade</h3><p>Um espaço para acompanhar o projeto.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lancamento" class="section launch-section">
+      <div class="section-heading">
+        <span>02</span>
+        <div>
+          <p class="section-label">FIQUE ATENTO</p>
+          <h2>Lançamento</h2>
+        </div>
+      </div>
+
+      <div class="launch-card">
+        <div>
+          <p class="launch-kicker">RYO YAMADA BETA TEST</p>
+          <h3>EM BREVE</h3>
+          <p class="muted">A data oficial ainda será anunciada.</p>
+        </div>
+
+        <div class="countdown" id="countdown">
+          <div><strong id="days">--</strong><small>DIAS</small></div>
+          <i>:</i>
+          <div><strong id="hours">--</strong><small>HORAS</small></div>
+          <i>:</i>
+          <div><strong id="minutes">--</strong><small>MIN</small></div>
+          <i>:</i>
+          <div><strong id="seconds">--</strong><small>SEG</small></div>
+        </div>
+
+        <div class="launch-note">
+          <span class="pulse"></span>
+          DATA A DEFINIR
+        </div>
+      </div>
+    </section>
+
+    <section id="novidades" class="section">
+      <div class="section-heading">
+        <span>03</span>
+        <div>
+          <p class="section-label">ACOMPANHE</p>
+          <h2>Novidades</h2>
+        </div>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <span class="news-number">01</span>
+          <p class="news-tag">DESENVOLVIMENTO</p>
+          <h3>O projeto está sendo preparado</h3>
+          <p>Novos sistemas e recursos estão sendo desenvolvidos para o Beta Test.</p>
+        </article>
+        <article class="news-card">
+          <span class="news-number">02</span>
+          <p class="news-tag">BETA</p>
+          <h3>Uma fase de testes está chegando</h3>
+          <p>O Beta permitirá testar as principais funcionalidades antes do lançamento.</p>
+        </article>
+        <article class="news-card">
+          <span class="news-number">03</span>
+          <p class="news-tag">LANÇAMENTO</p>
+          <h3>Uma nova etapa está por vir</h3>
+          <p>A data oficial será anunciada assim que o projeto estiver pronto.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div>
+        <p class="section-label">RYO YAMADA BETA TEST</p>
+        <h2>Algo novo está chegando.</h2>
+      </div>
+      <button class="btn btn-primary" id="notifyBtn">SERVIDOR EM BREVE</button>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>RYO YAMADA <span>BETA TEST</span></strong>
+      <p>Um projeto independente em desenvolvimento.</p>
+    </div>
+    <p>© <span id="year"></span> Ryo Yamada Beta Test</p>
+  </footer>
+
+  <div class="toast" id="toast">O servidor ainda não está disponível.</div>
+  <script>
+// ================================
+// CONFIGURAÇÃO DO SITE
+// ================================
+// Quando tiver uma data oficial, altere para algo como:
+// const LAUNCH_DATE = "2026-12-20T20:00:00-03:00";
+const LAUNCH_DATE = null;
+
+const $ = (id) => document.getElementById(id);
+
+$("year").textContent = new Date().getFullYear();
+
+function updateCountdown() {
+  if (!LAUNCH_DATE) return;
+
+  const target = new Date(LAUNCH_DATE).getTime();
+  const now = Date.now();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    $("days").textContent = "00";
+    $("hours").textContent = "00";
+    $("minutes").textContent = "00";
+    $("seconds").textContent = "00";
+    return;
+  }
+
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff / 3600000) % 24);
+  const minutes = Math.floor((diff / 60000) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  $("days").textContent = String(days).padStart(2, "0");
+  $("hours").textContent = String(hours).padStart(2, "0");
+  $("minutes").textContent = String(minutes).padStart(2, "0");
+  $("seconds").textContent = String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("nav");
+
+menuToggle.addEventListener("click", () => {
+  nav.classList.toggle("open");
+});
+
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", () => nav.classList.remove("open"));
+});
+
+const notifyBtn = $("notifyBtn");
+const toast = $("toast");
+
+notifyBtn.addEventListener("click", () => {
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+});
+
+</script>
+</body>
+</html>
